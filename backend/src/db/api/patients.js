@@ -19,9 +19,7 @@ module.exports = class PatientsDBApi {
         last_name: data.last_name || null,
         date_of_birth: data.date_of_birth || null,
         email: data.email || null,
-        medicare_number: data.medicare_number || null,
         gender: data.gender || null,
-        phone: data.phone || null,
         residential_suburb: data.residential_suburb || null,
         residential_post_code: data.residential_post_code || null,
         state: data.state || null,
@@ -37,6 +35,8 @@ module.exports = class PatientsDBApi {
         occupation: data.occupation || null,
         concession_card_holder: data.concession_card_holder || null,
         notes: data.notes || null,
+        phone: data.phone || null,
+        medicare_number: data.medicare_number || null,
         importHash: data.importHash || null,
         createdById: currentUser.id,
         updatedById: currentUser.id,
@@ -61,9 +61,7 @@ module.exports = class PatientsDBApi {
         last_name: data.last_name || null,
         date_of_birth: data.date_of_birth || null,
         email: data.email || null,
-        medicare_number: data.medicare_number || null,
         gender: data.gender || null,
-        phone: data.phone || null,
         residential_suburb: data.residential_suburb || null,
         residential_post_code: data.residential_post_code || null,
         state: data.state || null,
@@ -79,6 +77,8 @@ module.exports = class PatientsDBApi {
         occupation: data.occupation || null,
         concession_card_holder: data.concession_card_holder || null,
         notes: data.notes || null,
+        phone: data.phone || null,
+        medicare_number: data.medicare_number || null,
         updatedById: currentUser.id,
       },
       { transaction },
@@ -310,6 +310,24 @@ module.exports = class PatientsDBApi {
         };
       }
 
+      if (filter.phone) {
+        where = {
+          ...where,
+          [Op.and]: Utils.ilike('patients', 'phone', filter.phone),
+        };
+      }
+
+      if (filter.medicare_number) {
+        where = {
+          ...where,
+          [Op.and]: Utils.ilike(
+            'patients',
+            'medicare_number',
+            filter.medicare_number,
+          ),
+        };
+      }
+
       if (filter.medicare_expiry_dateRange) {
         const [start, end] = filter.medicare_expiry_dateRange;
 
@@ -343,20 +361,6 @@ module.exports = class PatientsDBApi {
         where = {
           ...where,
           active: filter.active === true || filter.active === 'true',
-        };
-      }
-
-      if (filter.medicare_number) {
-        where = {
-          ...where,
-          medicare_number: filter.medicare_number,
-        };
-      }
-
-      if (filter.phone) {
-        where = {
-          ...where,
-          phone: filter.phone,
         };
       }
 
@@ -420,21 +424,21 @@ module.exports = class PatientsDBApi {
       where = {
         [Op.or]: [
           { ['id']: Utils.uuid(query) },
-          Utils.ilike('patients', 'id', query),
+          Utils.ilike('patients', 'first_name', query),
         ],
       };
     }
 
     const records = await db.patients.findAll({
-      attributes: ['id', 'id'],
+      attributes: ['id', 'first_name'],
       where,
       limit: limit ? Number(limit) : undefined,
-      orderBy: [['id', 'ASC']],
+      orderBy: [['first_name', 'ASC']],
     });
 
     return records.map((record) => ({
       id: record.id,
-      label: record.id,
+      label: record.first_name,
     }));
   }
 };

@@ -29,23 +29,9 @@ const patientsFields = {
     options: [{ value: 'value', label: 'value' }],
   },
 
-  medicare_number: {
-    type: 'enum',
-    label: 'Medicare Number',
-
-    options: [{ value: 'value', label: 'value' }],
-  },
-
   gender: {
     type: 'string',
     label: 'Gender',
-
-    options: [{ value: 'value', label: 'value' }],
-  },
-
-  phone: {
-    type: 'enum',
-    label: 'Phone',
 
     options: [{ value: 'value', label: 'value' }],
   },
@@ -151,6 +137,20 @@ const patientsFields = {
   notes: {
     type: 'string',
     label: 'Notes',
+
+    options: [{ value: 'value', label: 'value' }],
+  },
+
+  phone: {
+    type: 'string',
+    label: 'Phone',
+
+    options: [{ value: 'value', label: 'value' }],
+  },
+
+  medicare_number: {
+    type: 'string',
+    label: 'Medicare Number',
 
     options: [{ value: 'value', label: 'value' }],
   },

@@ -89,18 +89,7 @@ const PatientsForm = (props) => {
               </Grid>
 
               <Grid item>
-                <RadioFormItem
-                  name={'medicare_number'}
-                  schema={patientsFields}
-                />
-              </Grid>
-
-              <Grid item>
                 <InputFormItem name={'gender'} schema={patientsFields} />
-              </Grid>
-
-              <Grid item>
-                <RadioFormItem name={'phone'} schema={patientsFields} />
               </Grid>
 
               <Grid item>
@@ -196,6 +185,17 @@ const PatientsForm = (props) => {
                 <InputFormItem
                   multiline
                   name={'notes'}
+                  schema={patientsFields}
+                />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem name={'phone'} schema={patientsFields} />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem
+                  name={'medicare_number'}
                   schema={patientsFields}
                 />
               </Grid>

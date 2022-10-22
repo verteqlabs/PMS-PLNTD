@@ -79,6 +79,8 @@ const PatientsTable = () => {
     { label: 'Occupation', title: 'occupation' },
     { label: 'Concession Card Holder', title: 'concession_card_holder' },
     { label: 'Notes', title: 'notes' },
+    { label: 'Phone', title: 'phone' },
+    { label: 'Medicare Number', title: 'medicare_number' },
   ]);
 
   const [filterItems, setFilterItems] = React.useState([]);
@@ -249,23 +251,11 @@ const PatientsTable = () => {
     },
 
     {
-      field: 'medicare_number',
-
-      headerName: 'Medicare Number',
-    },
-
-    {
       field: 'gender',
 
       flex: 0.6,
 
       headerName: 'Gender',
-    },
-
-    {
-      field: 'phone',
-
-      headerName: 'Phone',
     },
 
     {
@@ -382,6 +372,22 @@ const PatientsTable = () => {
       flex: 0.6,
 
       headerName: 'Notes',
+    },
+
+    {
+      field: 'phone',
+
+      flex: 0.6,
+
+      headerName: 'Phone',
+    },
+
+    {
+      field: 'medicare_number',
+
+      flex: 0.6,
+
+      headerName: 'Medicare Number',
     },
 
     {

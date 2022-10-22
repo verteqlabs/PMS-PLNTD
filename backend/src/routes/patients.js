@@ -68,9 +68,13 @@ const router = express.Router();
  *          notes:
  *            type: string
  *            default: notes
+ *          phone:
+ *            type: string
+ *            default: phone
+ *          medicare_number:
+ *            type: string
+ *            default: medicare_number
 
- *          
- *          
  *          
  */
 

@@ -30,20 +30,8 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.TEXT,
       },
 
-      medicare_number: {
-        type: DataTypes.ENUM,
-
-        values: ['value'],
-      },
-
       gender: {
         type: DataTypes.TEXT,
-      },
-
-      phone: {
-        type: DataTypes.ENUM,
-
-        values: ['value'],
       },
 
       residential_suburb: {
@@ -113,6 +101,14 @@ module.exports = function (sequelize, DataTypes) {
       },
 
       notes: {
+        type: DataTypes.TEXT,
+      },
+
+      phone: {
+        type: DataTypes.TEXT,
+      },
+
+      medicare_number: {
         type: DataTypes.TEXT,
       },
 

@@ -30,7 +30,9 @@ const PatientsSelectItem = (props) => {
         return undefined;
       }
 
-      let label = originalValue.label ? originalValue.label : originalValue.id;
+      let label = originalValue.label
+        ? originalValue.label
+        : originalValue.first_name;
 
       return {
         id: originalValue.id,
