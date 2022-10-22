@@ -17,14 +17,14 @@ const actions = {
         type: 'PATIENTS_FORM_FIND_STARTED',
       });
 
-      axios.get(`/patients/${id}`).then((res) => {
+      axios.get(`/patients/${id}`).then(res => {
         const record = res.data;
 
         dispatch({
           type: 'PATIENTS_FORM_FIND_SUCCESS',
           payload: record,
         });
-      });
+      })
     } catch (error) {
       Errors.handle(error);
 
@@ -42,13 +42,13 @@ const actions = {
         type: 'PATIENTS_FORM_CREATE_STARTED',
       });
 
-      axios.post('/patients', { data: values }).then((res) => {
+      axios.post('/patients', { data: values }).then(res => {
         dispatch({
           type: 'PATIENTS_FORM_CREATE_SUCCESS',
         });
         showSnackbar({ type: 'success', message: 'Patients created' });
         dispatch(push('/admin/patients'));
-      });
+      })
     } catch (error) {
       Errors.handle(error);
 
@@ -58,13 +58,16 @@ const actions = {
     }
   },
 
-  doUpdate: (id, values, isProfile) => async (dispatch, getState) => {
+  doUpdate: (id, values, isProfile) => async (
+    dispatch,
+    getState,
+  ) => {
     try {
       dispatch({
         type: 'PATIENTS_FORM_UPDATE_STARTED',
       });
 
-      await axios.put(`/patients/${id}`, { id, data: values });
+      await axios.put(`/patients/${id}`, {id, data: values});
 
       dispatch(doInit());
 

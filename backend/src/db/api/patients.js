@@ -1,3 +1,4 @@
+
 const db = require('../models');
 const FileDBApi = require('./file');
 const crypto = require('crypto');
@@ -7,48 +8,137 @@ const Sequelize = db.Sequelize;
 const Op = Sequelize.Op;
 
 module.exports = class PatientsDBApi {
+
   static async create(data, options) {
-    const currentUser = (options && options.currentUser) || { id: null };
-    const transaction = (options && options.transaction) || undefined;
+  const currentUser = (options && options.currentUser) || { id: null };
+  const transaction = (options && options.transaction) || undefined;
 
-    const patients = await db.patients.create(
-      {
-        id: data.id || undefined,
+  const patients = await db.patients.create(
+  {
+  id: data.id || undefined,
 
-        first_name: data.first_name || null,
-        last_name: data.last_name || null,
-        date_of_birth: data.date_of_birth || null,
-        email: data.email || null,
-        gender: data.gender || null,
-        residential_suburb: data.residential_suburb || null,
-        residential_post_code: data.residential_post_code || null,
-        state: data.state || null,
-        medicare_reference_Number: data.medicare_reference_Number || null,
-        medicare_expiry_date: data.medicare_expiry_date || null,
-        IHI_Number: data.IHI_Number || null,
-        residential_street_address: data.residential_street_address || null,
-        preferred_pharmacy: data.preferred_pharmacy || null,
-        preferred_pharmacy_address: data.preferred_pharmacy_address || null,
-        preferred_pharmacy_suburb: data.preferred_pharmacy_suburb || null,
-        Preferred_pharmacy_email: data.Preferred_pharmacy_email || null,
-        private_health_insurance: data.private_health_insurance || null,
-        occupation: data.occupation || null,
-        concession_card_holder: data.concession_card_holder || null,
-        notes: data.notes || null,
-        phone: data.phone || null,
-        medicare_number: data.medicare_number || null,
-        importHash: data.importHash || null,
-        createdById: currentUser.id,
-        updatedById: currentUser.id,
-      },
-      { transaction },
-    );
+    first_name: data.first_name
+    ||
+    null
+,
 
-    return patients;
+    last_name: data.last_name
+    ||
+    null
+,
+
+    date_of_birth: data.date_of_birth
+    ||
+    null
+,
+
+    email: data.email
+    ||
+    null
+,
+
+    gender: data.gender
+    ||
+    null
+,
+
+    residential_suburb: data.residential_suburb
+    ||
+    null
+,
+
+    residential_post_code: data.residential_post_code
+    ||
+    null
+,
+
+    state: data.state
+    ||
+    null
+,
+
+    medicare_reference_Number: data.medicare_reference_Number
+    ||
+    null
+,
+
+    medicare_expiry_date: data.medicare_expiry_date
+    ||
+    null
+,
+
+    IHI_Number: data.IHI_Number
+    ||
+    null
+,
+
+    residential_street_address: data.residential_street_address
+    ||
+    null
+,
+
+    preferred_pharmacy: data.preferred_pharmacy
+    ||
+    null
+,
+
+    preferred_pharmacy_address: data.preferred_pharmacy_address
+    ||
+    null
+,
+
+    preferred_pharmacy_suburb: data.preferred_pharmacy_suburb
+    ||
+    null
+,
+
+    Preferred_pharmacy_email: data.Preferred_pharmacy_email
+    ||
+    null
+,
+
+    private_health_insurance: data.private_health_insurance
+    ||
+    null
+,
+
+    occupation: data.occupation
+    ||
+    null
+,
+
+    concession_card_holder: data.concession_card_holder
+    ||
+    null
+,
+
+    notes: data.notes
+    ||
+    null
+,
+
+    phone: data.phone
+    ||
+    null
+,
+
+    medicare_number: data.medicare_number
+    ||
+    null
+,
+
+  importHash: data.importHash || null,
+  createdById: currentUser.id,
+  updatedById: currentUser.id,
+  },
+  { transaction },
+  );
+
+  return patients;
   }
 
   static async update(id, data, options) {
-    const currentUser = (options && options.currentUser) || { id: null };
+    const currentUser = (options && options.currentUser) || {id: null};
     const transaction = (options && options.transaction) || undefined;
 
     const patients = await db.patients.findByPk(id, {
@@ -57,53 +147,139 @@ module.exports = class PatientsDBApi {
 
     await patients.update(
       {
-        first_name: data.first_name || null,
-        last_name: data.last_name || null,
-        date_of_birth: data.date_of_birth || null,
-        email: data.email || null,
-        gender: data.gender || null,
-        residential_suburb: data.residential_suburb || null,
-        residential_post_code: data.residential_post_code || null,
-        state: data.state || null,
-        medicare_reference_Number: data.medicare_reference_Number || null,
-        medicare_expiry_date: data.medicare_expiry_date || null,
-        IHI_Number: data.IHI_Number || null,
-        residential_street_address: data.residential_street_address || null,
-        preferred_pharmacy: data.preferred_pharmacy || null,
-        preferred_pharmacy_address: data.preferred_pharmacy_address || null,
-        preferred_pharmacy_suburb: data.preferred_pharmacy_suburb || null,
-        Preferred_pharmacy_email: data.Preferred_pharmacy_email || null,
-        private_health_insurance: data.private_health_insurance || null,
-        occupation: data.occupation || null,
-        concession_card_holder: data.concession_card_holder || null,
-        notes: data.notes || null,
-        phone: data.phone || null,
-        medicare_number: data.medicare_number || null,
+
+        first_name: data.first_name
+        ||
+        null
+,
+
+        last_name: data.last_name
+        ||
+        null
+,
+
+        date_of_birth: data.date_of_birth
+        ||
+        null
+,
+
+        email: data.email
+        ||
+        null
+,
+
+        gender: data.gender
+        ||
+        null
+,
+
+        residential_suburb: data.residential_suburb
+        ||
+        null
+,
+
+        residential_post_code: data.residential_post_code
+        ||
+        null
+,
+
+        state: data.state
+        ||
+        null
+,
+
+        medicare_reference_Number: data.medicare_reference_Number
+        ||
+        null
+,
+
+        medicare_expiry_date: data.medicare_expiry_date
+        ||
+        null
+,
+
+        IHI_Number: data.IHI_Number
+        ||
+        null
+,
+
+        residential_street_address: data.residential_street_address
+        ||
+        null
+,
+
+        preferred_pharmacy: data.preferred_pharmacy
+        ||
+        null
+,
+
+        preferred_pharmacy_address: data.preferred_pharmacy_address
+        ||
+        null
+,
+
+        preferred_pharmacy_suburb: data.preferred_pharmacy_suburb
+        ||
+        null
+,
+
+        Preferred_pharmacy_email: data.Preferred_pharmacy_email
+        ||
+        null
+,
+
+        private_health_insurance: data.private_health_insurance
+        ||
+        null
+,
+
+        occupation: data.occupation
+        ||
+        null
+,
+
+        concession_card_holder: data.concession_card_holder
+        ||
+        null
+,
+
+        notes: data.notes
+        ||
+        null
+,
+
+        phone: data.phone
+        ||
+        null
+,
+
+        medicare_number: data.medicare_number
+        ||
+        null
+,
+
         updatedById: currentUser.id,
       },
-      { transaction },
+      {transaction},
     );
 
     return patients;
   }
 
   static async remove(id, options) {
-    const currentUser = (options && options.currentUser) || { id: null };
+    const currentUser = (options && options.currentUser) || {id: null};
     const transaction = (options && options.transaction) || undefined;
 
     const patients = await db.patients.findByPk(id, options);
 
-    await patients.update(
-      {
-        deletedBy: currentUser.id,
-      },
-      {
-        transaction,
-      },
-    );
+    await patients.update({
+      deletedBy: currentUser.id
+    }, {
+      transaction,
+    });
 
     await patients.destroy({
-      transaction,
+      transaction
     });
 
     return patients;
@@ -112,13 +288,16 @@ module.exports = class PatientsDBApi {
   static async findBy(where, options) {
     const transaction = (options && options.transaction) || undefined;
 
-    const patients = await db.patients.findOne({ where }, { transaction });
+    const patients = await db.patients.findOne(
+      { where },
+      { transaction },
+    );
 
     if (!patients) {
       return patients;
     }
 
-    const output = patients.get({ plain: true });
+    const output = patients.get({plain: true});
 
     return output;
   }
@@ -134,7 +313,9 @@ module.exports = class PatientsDBApi {
 
     const transaction = (options && options.transaction) || undefined;
     let where = {};
-    let include = [];
+    let include = [
+
+    ];
 
     if (filter) {
       if (filter.id) {
@@ -147,14 +328,22 @@ module.exports = class PatientsDBApi {
       if (filter.first_name) {
         where = {
           ...where,
-          [Op.and]: Utils.ilike('patients', 'first_name', filter.first_name),
+          [Op.and]: Utils.ilike(
+            'patients',
+            'first_name',
+            filter.first_name,
+          ),
         };
       }
 
       if (filter.last_name) {
         where = {
           ...where,
-          [Op.and]: Utils.ilike('patients', 'last_name', filter.last_name),
+          [Op.and]: Utils.ilike(
+            'patients',
+            'last_name',
+            filter.last_name,
+          ),
         };
       }
 
@@ -172,14 +361,22 @@ module.exports = class PatientsDBApi {
       if (filter.email) {
         where = {
           ...where,
-          [Op.and]: Utils.ilike('patients', 'email', filter.email),
+          [Op.and]: Utils.ilike(
+            'patients',
+            'email',
+            filter.email,
+          ),
         };
       }
 
       if (filter.gender) {
         where = {
           ...where,
-          [Op.and]: Utils.ilike('patients', 'gender', filter.gender),
+          [Op.and]: Utils.ilike(
+            'patients',
+            'gender',
+            filter.gender,
+          ),
         };
       }
 
@@ -197,7 +394,11 @@ module.exports = class PatientsDBApi {
       if (filter.state) {
         where = {
           ...where,
-          [Op.and]: Utils.ilike('patients', 'state', filter.state),
+          [Op.and]: Utils.ilike(
+            'patients',
+            'state',
+            filter.state,
+          ),
         };
       }
 
@@ -215,7 +416,11 @@ module.exports = class PatientsDBApi {
       if (filter.IHI_Number) {
         where = {
           ...where,
-          [Op.and]: Utils.ilike('patients', 'IHI_Number', filter.IHI_Number),
+          [Op.and]: Utils.ilike(
+            'patients',
+            'IHI_Number',
+            filter.IHI_Number,
+          ),
         };
       }
 
@@ -288,7 +493,11 @@ module.exports = class PatientsDBApi {
       if (filter.occupation) {
         where = {
           ...where,
-          [Op.and]: Utils.ilike('patients', 'occupation', filter.occupation),
+          [Op.and]: Utils.ilike(
+            'patients',
+            'occupation',
+            filter.occupation,
+          ),
         };
       }
 
@@ -306,14 +515,22 @@ module.exports = class PatientsDBApi {
       if (filter.notes) {
         where = {
           ...where,
-          [Op.and]: Utils.ilike('patients', 'notes', filter.notes),
+          [Op.and]: Utils.ilike(
+            'patients',
+            'notes',
+            filter.notes,
+          ),
         };
       }
 
       if (filter.phone) {
         where = {
           ...where,
-          [Op.and]: Utils.ilike('patients', 'phone', filter.phone),
+          [Op.and]: Utils.ilike(
+            'patients',
+            'phone',
+            filter.phone,
+          ),
         };
       }
 
@@ -360,7 +577,9 @@ module.exports = class PatientsDBApi {
       ) {
         where = {
           ...where,
-          active: filter.active === true || filter.active === 'true',
+          active:
+            filter.active === true ||
+            filter.active === 'true',
         };
       }
 
@@ -396,23 +615,24 @@ module.exports = class PatientsDBApi {
       }
     }
 
-    let { rows, count } = await db.patients.findAndCountAll({
-      where,
-      include,
-      distinct: true,
-      limit: limit ? Number(limit) : undefined,
-      offset: offset ? Number(offset) : undefined,
-      order:
-        filter.field && filter.sort
+    let { rows, count } = await db.patients.findAndCountAll(
+      {
+        where,
+        include,
+        distinct: true,
+        limit: limit ? Number(limit) : undefined,
+        offset: offset ? Number(offset) : undefined,
+        order: (filter.field && filter.sort)
           ? [[filter.field, filter.sort]]
           : [['createdAt', 'desc']],
-      transaction,
-    });
+        transaction,
+      },
+    );
 
-    //    rows = await this._fillWithRelationsAndFilesForRows(
-    //      rows,
-    //      options,
-    //    );
+//    rows = await this._fillWithRelationsAndFilesForRows(
+//      rows,
+//      options,
+//    );
 
     return { rows, count };
   }
@@ -424,13 +644,17 @@ module.exports = class PatientsDBApi {
       where = {
         [Op.or]: [
           { ['id']: Utils.uuid(query) },
-          Utils.ilike('patients', 'first_name', query),
+          Utils.ilike(
+            'patients',
+            'first_name',
+            query,
+          ),
         ],
       };
     }
 
     const records = await db.patients.findAll({
-      attributes: ['id', 'first_name'],
+      attributes: [ 'id', 'first_name' ],
       where,
       limit: limit ? Number(limit) : undefined,
       orderBy: [['first_name', 'ASC']],
@@ -441,4 +665,6 @@ module.exports = class PatientsDBApi {
       label: record.first_name,
     }));
   }
+
 };
+

@@ -7,6 +7,6 @@ const PatientsTablePage = () => {
       <PatientsTable />
     </div>
   );
-};
+}
 
 export default PatientsTablePage;

@@ -3,14 +3,14 @@ import * as dataFormat from 'pages/CRUD/Patients/table/PatientsDataFormatters';
 
 import actions from 'actions/patients/patientsListActions';
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import {Link} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
 import { useHistory } from 'react-router';
-import { uniqueId } from 'lodash';
+import {uniqueId} from 'lodash';
 import { withStyles } from '@mui/styles';
-import { makeStyles } from '@mui/styles';
-import { DataGrid } from '@mui/x-data-grid';
-import { Link as LinkMaterial } from '../../../../components/Wrappers';
+import {makeStyles} from "@mui/styles";
+import { DataGrid } from "@mui/x-data-grid";
+import { Link as LinkMaterial} from '../../../../components/Wrappers';
 
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
@@ -19,23 +19,23 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import TextField from '@mui/material/TextField';
-import Grid from '@mui/material/Grid';
-import CloseIcon from '@mui/icons-material/Close';
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import TextField from "@mui/material/TextField";
+import Grid from "@mui/material/Grid";
+import CloseIcon from "@mui/icons-material/Close";
 import Stack from '@mui/material/Stack';
 import LinearProgress from '@mui/material/LinearProgress';
 
 import Widget from 'components/Widget';
 import Actions from '../../../../components/Table/Actions';
-import Dialog from '../../../../components/Dialog';
+import Dialog from "../../../../components/Dialog";
 
 const useStyles = makeStyles({
   container: {
     paddingTop: 10,
-    paddingBottom: 10,
+    paddingBottom: 10
   },
   actions: {
     display: 'flex',
@@ -44,7 +44,7 @@ const useStyles = makeStyles({
     '& a': {
       textDecoration: 'none',
       color: '#fff',
-    },
+    }
   },
 });
 
@@ -55,32 +55,8 @@ const PatientsTable = () => {
   const [width, setWidth] = React.useState(window.innerWidth);
 
   const [filters, setFilters] = React.useState([
-    { label: 'First Name', title: 'first_name' },
-    { label: 'Last Name', title: 'last_name' },
-    { label: 'Date Of Birth', title: 'date_of_birth' },
-    { label: 'Email', title: 'email' },
-    { label: 'Gender', title: 'gender' },
-    { label: 'Residential Suburb', title: 'residential_suburb' },
-    { label: 'State', title: 'state' },
-    { label: 'Medicare Reference Number', title: 'medicare_reference_Number' },
-    { label: 'IHI Number', title: 'IHI_Number' },
-    {
-      label: 'Residential Street Address',
-      title: 'residential_street_address',
-    },
-    { label: 'Preferred Pharmacy', title: 'preferred_pharmacy' },
-    {
-      label: 'Preferred Pharmacy Address',
-      title: 'preferred_pharmacy_address',
-    },
-    { label: 'Preferred Pharmacy Suburb', title: 'preferred_pharmacy_suburb' },
-    { label: 'Preferred Pharmacy Email', title: 'Preferred_pharmacy_email' },
-    { label: 'Private Health Insurance', title: 'private_health_insurance' },
-    { label: 'Occupation', title: 'occupation' },
-    { label: 'Concession Card Holder', title: 'concession_card_holder' },
-    { label: 'Notes', title: 'notes' },
-    { label: 'Phone', title: 'phone' },
-    { label: 'Medicare Number', title: 'medicare_number' },
+    {label: 'First Name', title: 'first_name'},{label: 'Last Name', title: 'last_name'},{label: 'Date Of Birth', title: 'date_of_birth'},{label: 'Email', title: 'email'},{label: 'Gender', title: 'gender'},{label: 'Residential Suburb', title: 'residential_suburb'},{label: 'State', title: 'state'},{label: 'Medicare Reference Number', title: 'medicare_reference_Number'},{label: 'IHI Number', title: 'IHI_Number'},{label: 'Residential Street Address', title: 'residential_street_address'},{label: 'Preferred Pharmacy', title: 'preferred_pharmacy'},{label: 'Preferred Pharmacy Address', title: 'preferred_pharmacy_address'},{label: 'Preferred Pharmacy Suburb', title: 'preferred_pharmacy_suburb'},{label: 'Preferred Pharmacy Email', title: 'Preferred_pharmacy_email'},{label: 'Private Health Insurance', title: 'private_health_insurance'},{label: 'Occupation', title: 'occupation'},{label: 'Concession Card Holder', title: 'concession_card_holder'},{label: 'Notes', title: 'notes'},{label: 'Phone', title: 'phone'},{label: 'Medicare Number', title: 'medicare_number'},
+
   ]);
 
   const [filterItems, setFilterItems] = React.useState([]);
@@ -104,7 +80,7 @@ const PatientsTable = () => {
     setLoading(true);
     await dispatch(actions.doFetch({ limit, page, orderBy, request }));
     setLoading(false);
-  };
+  }
 
   React.useEffect(() => {
     loadData(rowsState.pageSize, rowsState.page, sortModel[0], filterUrl);
@@ -114,95 +90,85 @@ const PatientsTable = () => {
     updateWindowDimensions();
     window.addEventListener('resize', updateWindowDimensions);
     return () => window.removeEventListener('resize', updateWindowDimensions);
-  }, []);
+  }, [])
 
   const handleSortModelChange = (newModel) => {
     setSortModel(newModel);
   };
 
   const updateWindowDimensions = () => {
-    setWidth(window.innerWidth);
-  };
+    setWidth(window.innerWidth)
+  }
 
   const handleChange = (id) => (e) => {
     const value = e.target.value;
     const name = e.target.name;
 
-    setFilterItems(
-      filterItems.map((item) =>
-        item.id === id
-          ? { id, fields: { ...item.fields, [name]: value } }
-          : item,
-      ),
-    );
+    setFilterItems(filterItems.map(item =>
+      item.id === id ? { id, fields: { ...item.fields, [name]: value }} : item
+    ));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     let request = '&';
-    filterItems.forEach((item) => {
-      filters[
-        filters.map((filter) => filter.title).indexOf(item.fields.selectedField)
-      ].hasOwnProperty('number')
-        ? (request += `${item.fields.selectedField}Range=${item.fields.filterValueFrom}&${item.fields.selectedField}Range=${item.fields.filterValueTo}&`)
-        : (request += `${item.fields.selectedField}=${item.fields.filterValue}&`);
-    });
+    filterItems.forEach(item => {
+      filters[filters.map(filter => filter.title).indexOf(item.fields.selectedField)].hasOwnProperty('number')
+      ? request += `${item.fields.selectedField}Range=${item.fields.filterValueFrom}&${item.fields.selectedField}Range=${item.fields.filterValueTo}&`
+      : request += `${item.fields.selectedField}=${item.fields.filterValue}&`
+      })
 
     loadData(rowsState.pageSize, 0, sortModel[0], request);
     setFilterUrl(request);
   };
 
   const handleReset = () => {
-    setFilterItems([]);
+    setFilterItems([])
     setFilterUrl('');
-    dispatch(
-      actions.doFetch({ limit: rowsState.pageSize, page: 0, request: '' }),
-    );
-  };
+    dispatch(actions.doFetch({limit: rowsState.pageSize, page: 0, request: '' }));
+  }
 
   const addFilter = () => {
     let newItem = {
-      id: uniqueId(),
-      fields: {
-        filterValue: '',
-        filterValueFrom: '',
-        filterValueTo: '',
-      },
-    };
+        id: uniqueId(),
+        fields: {
+          filterValue: "",
+          filterValueFrom: "",
+          filterValueTo: "",
+        }
+    }
     newItem.fields.selectedField = filters[0].title;
-    setFilterItems([...filterItems, newItem]);
-  };
+    setFilterItems([...filterItems, newItem])
+  }
 
   const deleteFilter = (value) => (e) => {
     e.preventDefault();
     const newItems = filterItems.filter((item) => item.id !== value);
     if (newItems.length) {
-      setFilterItems(newItems);
+        setFilterItems(newItems);
     } else {
-      dispatch(actions.doFetch({ limit: 10, page: 1 }));
-      setFilterItems(newItems);
+        dispatch(actions.doFetch({limit: 10, page: 1}));
+        setFilterItems(newItems);
     }
-  };
+  }
 
   const handleDelete = () => {
-    dispatch(
-      actions.doDelete({ limit: 10, page: 0, request: filterUrl }, idToDelete),
-    );
-  };
+    dispatch(actions.doDelete({ limit: 10, page: 0, request: filterUrl }, idToDelete));
+  }
 
   const openModal = (event, cell) => {
     const id = cell;
     event.stopPropagation();
     dispatch(actions.doOpenConfirm(id));
-  };
+  }
 
   const closeModal = () => {
     dispatch(actions.doCloseConfirm());
-  };
+  }
 
   function NoRowsOverlay() {
     return (
-      <Stack height='100%' alignItems='center' justifyContent='center'>
+      <Stack height="100%" alignItems="center" justifyContent="center">
         No results found
       </Stack>
     );
@@ -210,211 +176,185 @@ const PatientsTable = () => {
 
   function humanize(str) {
     return str
-      .replace(/^[\s_]+|[\s_]+$/g, '')
-      .replace(/[_\s]+/g, ' ')
-      .replace(/^[a-z]/, function (m) {
-        return m.toUpperCase();
-      });
+        .replace(/^[\s_]+|[\s_]+$/g, '')
+        .replace(/[_\s]+/g, ' ')
+        .replace(/^[a-z]/, function(m) { return m.toUpperCase(); });
   }
 
   const columns = [
-    {
-      field: 'first_name',
 
-      flex: 0.6,
+      { field: "first_name",
 
-      headerName: 'First Name',
-    },
+        flex: 0.6,
 
-    {
-      field: 'last_name',
+      headerName: "First Name"
+      },
 
-      flex: 0.6,
+      { field: "last_name",
 
-      headerName: 'Last Name',
-    },
+        flex: 0.6,
 
-    {
-      field: 'date_of_birth',
+      headerName: "Last Name"
+      },
 
-      flex: 0.6,
+      { field: "date_of_birth",
 
-      headerName: 'Date Of Birth',
-    },
+        flex: 0.6,
 
-    {
-      field: 'email',
+      headerName: "Date Of Birth"
+      },
 
-      flex: 0.6,
+      { field: "email",
 
-      headerName: 'Email',
-    },
+        flex: 0.6,
 
-    {
-      field: 'gender',
+      headerName: "Email"
+      },
 
-      flex: 0.6,
+      { field: "gender",
 
-      headerName: 'Gender',
-    },
+        flex: 0.6,
 
-    {
-      field: 'residential_suburb',
+      headerName: "Gender"
+      },
 
-      flex: 0.6,
+      { field: "residential_suburb",
 
-      headerName: 'Residential Suburb',
-    },
+        flex: 0.6,
 
-    {
-      field: 'residential_post_code',
+      headerName: "Residential Suburb"
+      },
 
-      headerName: 'Residential Post Code',
-    },
+      { field: "residential_post_code",
 
-    {
-      field: 'state',
+      headerName: "Residential Post Code"
+      },
 
-      flex: 0.6,
+      { field: "state",
 
-      headerName: 'State',
-    },
+        flex: 0.6,
 
-    {
-      field: 'medicare_reference_Number',
+      headerName: "State"
+      },
 
-      flex: 0.6,
+      { field: "medicare_reference_Number",
 
-      headerName: 'Medicare Reference Number',
-    },
+        flex: 0.6,
 
-    {
-      field: 'medicare_expiry_date',
+      headerName: "Medicare Reference Number"
+      },
 
-      headerName: 'Medicare Expiry Date',
-    },
+      { field: "medicare_expiry_date",
 
-    {
-      field: 'IHI_Number',
+      headerName: "Medicare Expiry Date"
+      },
 
-      flex: 0.6,
+      { field: "IHI_Number",
 
-      headerName: 'IHI Number',
-    },
+        flex: 0.6,
 
-    {
-      field: 'residential_street_address',
+      headerName: "IHI Number"
+      },
 
-      flex: 0.6,
+      { field: "residential_street_address",
 
-      headerName: 'Residential Street Address',
-    },
+        flex: 0.6,
 
-    {
-      field: 'preferred_pharmacy',
+      headerName: "Residential Street Address"
+      },
 
-      flex: 0.6,
+      { field: "preferred_pharmacy",
 
-      headerName: 'Preferred Pharmacy',
-    },
+        flex: 0.6,
 
-    {
-      field: 'preferred_pharmacy_address',
+      headerName: "Preferred Pharmacy"
+      },
 
-      flex: 0.6,
+      { field: "preferred_pharmacy_address",
 
-      headerName: 'Preferred Pharmacy Address',
-    },
+        flex: 0.6,
 
-    {
-      field: 'preferred_pharmacy_suburb',
+      headerName: "Preferred Pharmacy Address"
+      },
 
-      flex: 0.6,
+      { field: "preferred_pharmacy_suburb",
 
-      headerName: 'Preferred Pharmacy Suburb',
-    },
+        flex: 0.6,
 
-    {
-      field: 'Preferred_pharmacy_email',
+      headerName: "Preferred Pharmacy Suburb"
+      },
 
-      flex: 0.6,
+      { field: "Preferred_pharmacy_email",
 
-      headerName: 'Preferred Pharmacy Email',
-    },
+        flex: 0.6,
 
-    {
-      field: 'private_health_insurance',
+      headerName: "Preferred Pharmacy Email"
+      },
 
-      flex: 0.6,
+      { field: "private_health_insurance",
 
-      headerName: 'Private Health Insurance',
-    },
+        flex: 0.6,
 
-    {
-      field: 'occupation',
+      headerName: "Private Health Insurance"
+      },
 
-      flex: 0.6,
+      { field: "occupation",
 
-      headerName: 'Occupation',
-    },
+        flex: 0.6,
 
-    {
-      field: 'concession_card_holder',
+      headerName: "Occupation"
+      },
 
-      flex: 0.6,
+      { field: "concession_card_holder",
 
-      headerName: 'Concession Card Holder',
-    },
+        flex: 0.6,
 
-    {
-      field: 'notes',
+      headerName: "Concession Card Holder"
+      },
 
-      flex: 0.6,
+      { field: "notes",
 
-      headerName: 'Notes',
-    },
+        flex: 0.6,
 
-    {
-      field: 'phone',
+      headerName: "Notes"
+      },
 
-      flex: 0.6,
+      { field: "phone",
 
-      headerName: 'Phone',
-    },
+        flex: 0.6,
 
-    {
-      field: 'medicare_number',
+      headerName: "Phone"
+      },
 
-      flex: 0.6,
+      { field: "medicare_number",
 
-      headerName: 'Medicare Number',
-    },
+        flex: 0.6,
 
-    {
-      field: 'id',
-      headerName: 'Actions',
-      sortable: false,
-      flex: 0.6,
-      maxWidth: 80,
-      renderCell: (params) => (
-        <Actions
-          classes={classes}
-          entity='patients'
-          openModal={openModal}
-          {...params}
-        />
-      ),
-    },
+      headerName: "Medicare Number"
+      },
+
+      {
+        field: 'id',
+        headerName: 'Actions',
+        sortable: false,
+        flex: 0.6,
+        maxWidth: 80,
+        renderCell: (params) => <Actions classes={classes} entity="patients" openModal={openModal} {...params} />,
+      }
   ];
 
   return (
     <div>
       <Widget title={<h4>{humanize('Patients')}</h4>} disableWidgetMenu>
         <Box className={classes.actions}>
-          <Link to='/admin/patients/new'>
+          <Link to="/admin/patients/new">
             <Button variant='contained'>New</Button>
           </Link>
-          <Button type='button' variant='contained' onClick={addFilter}>
+          <Button
+            type='button'
+            variant="contained"
+            onClick={addFilter}
+          >
             Add Filter
           </Button>
         </Box>
@@ -423,18 +363,18 @@ const PatientsTable = () => {
           {filterItems.map((item) => (
             <Grid
               container
-              alignItems='center'
+              alignItems="center"
               columns={12}
               spacing={1}
               className={classes.container}
             >
               <Grid item xs={3}>
-                <FormControl size='small' fullWidth>
+                <FormControl size="small" fullWidth>
                   <InputLabel>Field</InputLabel>
                   <Select
-                    label='Field'
+                    label="Field"
                     name='selectedField'
-                    size='small'
+                    size="small"
                     value={item.fields.selectedField}
                     onChange={handleChange(item.id)}
                   >
@@ -449,26 +389,24 @@ const PatientsTable = () => {
                   </Select>
                 </FormControl>
               </Grid>
-              {filters
-                .find((filter) => filter.title === item.fields.selectedField)
-                .hasOwnProperty('number') ? (
+              {filters.find(filter => filter.title === item.fields.selectedField).hasOwnProperty('number') ? (
                 <>
                   <Grid item xs={2}>
                     <TextField
-                      label='From'
+                      label="From"
                       type='text'
                       name='filterValueFrom'
-                      size='small'
+                      size="small"
                       fullWidth
                       onChange={handleChange(item.id)}
                     />
                   </Grid>
                   <Grid item xs={2}>
                     <TextField
-                      label='To'
+                      label="To"
                       type='text'
                       name='filterValueTo'
-                      size='small'
+                      size="small"
                       fullWidth
                       onChange={handleChange(item.id)}
                     />
@@ -477,10 +415,10 @@ const PatientsTable = () => {
               ) : (
                 <Grid item xs={4}>
                   <TextField
-                    label='Contained'
+                    label="Contained"
                     type='text'
                     name='filterValue'
-                    size='small'
+                    size="small"
                     fullWidth
                     onChange={handleChange(item.id)}
                   />
@@ -489,8 +427,8 @@ const PatientsTable = () => {
 
               <Grid item xs={2}>
                 <Button
-                  variant='outlined'
-                  color='error'
+                  variant="outlined"
+                  color="error"
                   onClick={deleteFilter(item.id)}
                 >
                   <CloseIcon />
@@ -501,12 +439,19 @@ const PatientsTable = () => {
           {filterItems.length > 0 && (
             <Grid container spacing={1}>
               <Grid item>
-                <Button variant='outlined' onClick={(e) => handleSubmit(e)}>
+                <Button
+                  variant="outlined"
+                  onClick={(e) => handleSubmit(e)}
+                >
                   Apply
                 </Button>
               </Grid>
               <Grid item>
-                <Button color='error' variant='outlined' onClick={handleReset}>
+                <Button
+                  color="error"
+                  variant="outlined"
+                  onClick={handleReset}
+                >
                   Clear
                 </Button>
               </Grid>
@@ -514,44 +459,39 @@ const PatientsTable = () => {
           )}
         </Box>
 
-        <div
-          style={{
-            minHeight: 500,
-            width: '100%',
-            paddingTop: 20,
-            paddingBottom: 20,
-          }}
-        >
+        <div style={{minHeight: 500, width: "100%", paddingTop: 20, paddingBottom: 20}}>
           <DataGrid
             rows={loading ? [] : rows}
             columns={columns}
-            sortingMode='server'
+            sortingMode="server"
             sortModel={sortModel}
             onSortModelChange={handleSortModelChange}
             rowsPerPageOptions={[5, 10, 20, 50, 100]}
             pageSize={5}
+
             pagination
             {...rowsState}
             rowCount={count}
-            paginationMode='server'
-            components={{ NoRowsOverlay, LoadingOverlay: LinearProgress }}
+            paginationMode="server"
+            components={{ NoRowsOverlay, LoadingOverlay: LinearProgress, }}
             onPageChange={(page) => {
-              setRowsState((prev) => ({ ...prev, page }));
+              setRowsState((prev) => ({ ...prev, page }))
             }}
             onPageSizeChange={(pageSize) => {
-              setRowsState((prev) => ({ ...prev, pageSize }));
-            }}
+              setRowsState((prev) => ({ ...prev, pageSize }))
+              }
+            }
+
             onSelectionModelChange={(newSelectionModel) => {
               setSelectionModel(newSelectionModel);
             }}
             selectionModel={selectionModel}
+
             checkboxSelection
             disableSelectionOnClick
             disableColumnMenu
             loading={loading}
-            onRowClick={(e) => {
-              history.push(`/admin/patients/${e.id}/edit`);
-            }}
+            onRowClick={(e) => {history.push(`/admin/patients/${e.id}/edit`)}}
             autoHeight
           />
         </div>
@@ -573,13 +513,13 @@ const PatientsTable = () => {
 
       <Dialog
         open={modalOpen}
-        title='Confirm delete'
-        contentText='Are you sure you want to delete this item?'
+        title="Confirm delete"
+        contentText="Are you sure you want to delete this item?"
         onClose={closeModal}
         onSubmit={handleDelete}
       />
     </div>
-  );
-};
+  )
+}
 
 export default PatientsTable;

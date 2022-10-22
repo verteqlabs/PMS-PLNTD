@@ -1,3 +1,4 @@
+
 import auth from 'reducers/auth';
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
@@ -5,6 +6,10 @@ import { connectRouter } from 'connected-react-router';
 import users from 'reducers/users/usersReducers';
 
 import patients from 'reducers/patients/patientsReducers';
+
+import users from 'reducers/users/usersReducers';
+
+import appointment from 'reducers/appointment/appointmentReducers';
 
 export default (history) =>
   combineReducers({
@@ -14,4 +19,10 @@ export default (history) =>
     users,
 
     patients,
+
+    users,
+
+    appointment,
+
   });
+

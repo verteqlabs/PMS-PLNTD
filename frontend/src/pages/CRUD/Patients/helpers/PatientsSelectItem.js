@@ -30,9 +30,7 @@ const PatientsSelectItem = (props) => {
         return undefined;
       }
 
-      let label = originalValue.label
-        ? originalValue.label
-        : originalValue.first_name;
+      let label = originalValue.label ? originalValue.label : originalValue.first_name;
 
       return {
         id: originalValue.id,
@@ -52,7 +50,10 @@ const PatientsSelectItem = (props) => {
     },
   };
 
-  const { form, ...rest } = props;
+  const {
+    form,
+    ...rest
+  } = props;
 
   return (
     <React.Fragment>
@@ -65,10 +66,12 @@ const PatientsSelectItem = (props) => {
       />
     </React.Fragment>
   );
-};
+}
 
 const select = (state) => ({
-  hasPermissionToCreate: state.patients.hasPermissionToCreate,
+  hasPermissionToCreate: state.patients.hasPermissionToCreate
 });
 
-export default connect(select)(PatientsSelectItem);
+export default connect(select)(
+  PatientsSelectItem,
+);
