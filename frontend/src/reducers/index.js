@@ -11,6 +11,10 @@ import users from 'reducers/users/usersReducers';
 
 import appointment from 'reducers/appointment/appointmentReducers';
 
+import users from 'reducers/users/usersReducers';
+
+import appointment from 'reducers/appointment/appointmentReducers';
+
 export default (history) =>
   combineReducers({
     router: connectRouter(history),
@@ -19,6 +23,10 @@ export default (history) =>
     users,
 
     patients,
+
+    users,
+
+    appointment,
 
     users,
 

@@ -43,6 +43,12 @@ import UsersTablePage from 'pages/CRUD/Users/table/UsersTablePage';
 import AppointmentFormPage from 'pages/CRUD/Appointment/form/AppointmentFormPage';
 import AppointmentTablePage from 'pages/CRUD/Appointment/table/AppointmentTablePage';
 
+import UsersFormPage from 'pages/CRUD/Users/form/UsersFormPage';
+import UsersTablePage from 'pages/CRUD/Users/table/UsersTablePage';
+
+import AppointmentFormPage from 'pages/CRUD/Appointment/form/AppointmentFormPage';
+import AppointmentTablePage from 'pages/CRUD/Appointment/table/AppointmentTablePage';
+
 const Redirect = (props) => {
   useEffect(() => window.location.replace(props.url))
   return <span>Redirecting...</span>;
@@ -91,6 +97,14 @@ function Layout(props) {
                     <Route path={"/admin/patients"} exact component={PatientsTablePage} />
                     <Route path={"/admin/patients/new"} exact component={PatientsFormPage} />
                     <Route path={"/admin/patients/:id/edit"} exact component={PatientsFormPage} />
+
+                    <Route path={"/admin/users"} exact component={UsersTablePage} />
+                    <Route path={"/admin/users/new"} exact component={UsersFormPage} />
+                    <Route path={"/admin/users/:id/edit"} exact component={UsersFormPage} />
+
+                    <Route path={"/admin/appointment"} exact component={AppointmentTablePage} />
+                    <Route path={"/admin/appointment/new"} exact component={AppointmentFormPage} />
+                    <Route path={"/admin/appointment/:id/edit"} exact component={AppointmentFormPage} />
 
                     <Route path={"/admin/users"} exact component={UsersTablePage} />
                     <Route path={"/admin/users/new"} exact component={UsersFormPage} />

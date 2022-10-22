@@ -144,6 +144,24 @@ function Sidebar({ location, structure }) {
           />
 
           <SidebarLink
+            label="Users"
+            link="/admin/users"
+            location={location}
+            isSidebarOpened={isSidebarOpenedWrapper}
+            icon={<CoreIcon />}
+            toggleDrawer={toggleDrawer(true)}
+          />
+
+          <SidebarLink
+            label="Appointment"
+            link="/admin/appointment"
+            location={location}
+            isSidebarOpened={isSidebarOpenedWrapper}
+            icon={<CoreIcon />}
+            toggleDrawer={toggleDrawer(true)}
+          />
+
+          <SidebarLink
             label="Documentation"
             link="/documentation"
             location={location}

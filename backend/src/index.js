@@ -22,6 +22,10 @@ const usersRoutes = require('./routes/users');
 
 const appointmentRoutes = require('./routes/appointment');
 
+const usersRoutes = require('./routes/users');
+
+const appointmentRoutes = require('./routes/appointment');
+
 const options = {
   definition: {
     openapi: "3.0.0",
@@ -74,6 +78,10 @@ app.use('/api/file', fileRoutes);
 app.use('/api/users', passport.authenticate('jwt', {session: false}), usersRoutes);
 
 app.use('/api/patients', passport.authenticate('jwt', {session: false}), patientsRoutes);
+
+app.use('/api/users', passport.authenticate('jwt', {session: false}), usersRoutes);
+
+app.use('/api/appointment', passport.authenticate('jwt', {session: false}), appointmentRoutes);
 
 app.use('/api/users', passport.authenticate('jwt', {session: false}), usersRoutes);
 
